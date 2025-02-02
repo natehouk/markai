@@ -1,5 +1,5 @@
 # MarkAI
-AI Instruction Markup, _inspired by Markdown_ and Built for Automation
+*AI Instruction Markup, _inspired by Markdown_ and Built for Automation*
 
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/natehouk/markai/blob/main/LICENSE)
 [![Version](https://img.shields.io/badge/version-1.0-blue.svg)](https://github.com/natehouk/markai/releases)
