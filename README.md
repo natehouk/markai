@@ -1,4 +1,5 @@
-# MarkAI - AI Instruction Markup, Inspired by Markdown and Built for Automation
+# MarkAI
+*AI Instruction Markup, _inspired by Markdown_ and Built for Automation*
 
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/natehouk/markai/blob/main/LICENSE)
 [![Version](https://img.shields.io/badge/version-1.0-blue.svg)](https://github.com/natehouk/markai/releases)
@@ -9,7 +10,7 @@
 
 ## Description
 
-MarkAI redefines how automated instructions are embedded in text. Inspired by the simplicity and elegance of [Markdown](https://daringfireball.net/projects/markdown/), MarkAI provides a standardized, lightweight method to direct AI processing. Its clear syntax and built-in safeguards ensure efficient automation while preventing unwanted recursive processing.
+MarkAI redefines how automated instructions are embedded in text. Drawing inspiration from the simplicity and elegance of [Markdown](https://daringfireball.net/projects/markdown/), it offers a standardized, lightweight method to direct AI processing. Its clear syntax and built-in safeguards ensure that automation workflows remain efficient and human-friendly.
 
 ## Table of Contents
 - [Overview](#overview)
@@ -20,53 +21,12 @@ MarkAI redefines how automated instructions are embedded in text. Inspired by th
 
 ## Overview
 
-MarkAI uses XML-style tags to encapsulate processing commands alongside human-friendly text and annotations. By clearly separating machine instructions from commentary, it maintains clarity and reliability in automation workflows.
+MarkAI uses XML-style tags to encapsulate processing commands alongside human-readable text and annotations. This clear separation guarantees that AI instructions are executed accurately while human commentary is preserved.
 
 ## Core Format
 
-1. **Basic Command:**
-   ```xml
-   <ai_instruction>
-     Format this text as JSON
-   </ai_instruction>
-   ```
-
-2. **Command with Human Comments:**
-   ```xml
-   <ai_instruction>
-     Process the content
-
-     <!--ai-ignore
-     Internal note: This section requires special handling.
-     ai-ignore-->
-
-     Format as JSON
-   </ai_instruction>
-   ```
-
-3. **Protected Command:**
-   ```xml
-   <ai_instruction modify="false">
-     This content is locked and cannot be modified by automated processes.
-   </ai_instruction>
-   ```
-
-## Key Features
-
-- **Markdown-inspired:** Clean, simple, and intuitive for both writers and machines.
-- **Dual Readability:** Combines natural language with precise, machine-executable commands.
-- **Safety-First:** Prevents recursive processing and potential automation loops.
-- **Flexible:** Easily integrated into any text-based workflow or project.
-- **Extensible:** Designed to evolve with expanding AI processing needs.
-
-## Usage
-
-Embed MarkAI commands within your text files to instruct AI-powered automation. The tag-based approach ensures that each command is processed exactly once while human annotations provide extra context where needed.
-
-For detailed information on syntax, processing rules, and integration guidelines, please refer to the full specification document provided with this release.
-
-## License
-
-MarkAI is distributed under the MIT License.
-
-&copy; 2025 Nathaniel J. Houk
+### 1. Basic Command
+```xml
+<ai_instruction>
+  Format this text as JSON
+</ai_instruction>
