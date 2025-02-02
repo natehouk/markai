@@ -1,57 +1,57 @@
-# 🤖 AI Instruction Tag Format (RFC_AI-0001)
-[![RFC](https://img.shields.io/badge/RFC-AI--0001-blue.svg)](https://github.com/natehouk/RFC_AI-0001-ai-instruction-tag/blob/main/RFC_AI-0001.txt)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/natehouk/RFC_AI-0001-ai-instruction-tag/blob/main/LICENSE)
+MarkAI - Intelligent Instruction Approach
+==========================================
 
-A standardized format for embedding AI instructions in text files using simple tag notation.
+Description
+-----------
+MarkAI redefines how automated instructions are embedded in text. Inspired by the simplicity and elegance of Markdown
+(https://daringfireball.net/projects/markdown/), MarkAI provides a standardized, lightweight method to direct AI processing.
+Its clear syntax and built-in safeguards ensure efficient automation while preventing unwanted recursive processing.
 
-## 📖 Overview
+Overview
+--------
+MarkAI uses XML-style tags to encapsulate processing commands alongside human-friendly text and annotations.
+By clearly separating machine instructions from commentary, it maintains clarity and reliability in automation workflows.
 
-The AI Instruction Tag Format (RFC_AI-0001) defines a standard method for embedding AI processing instructions within text files. The format uses XML-style tags for instructions and HTML-style comments for human annotations. It solves the halting problem in AI instruction processing by creating explicit boundaries between processable instructions and human meta-commentary.
+Core Format
+-----------
+1. Basic Command:
+   <ai_instruction>
+     Format this text as JSON
+   </ai_instruction>
 
-## 🎯 Core Format
+2. Command with Human Comments:
+   <ai_instruction>
+     Process the content
 
-### Basic Instruction
-```xml
-<ai_instruction>
-Format this text as JSON
-</ai_instruction>
-```
+     <!--ai-ignore
+     Internal note: This section requires special handling.
+     ai-ignore-->
 
-### With Human Comments
-```xml
-<ai_instruction>
-Process this content
+     Format as JSON
+   </ai_instruction>
 
-<!--ai-ignore
-Internal note: This section requires special handling
-ai-ignore-->
+3. Protected Command:
+   <ai_instruction modify="false">
+     This content is locked and cannot be modified by automated processes.
+   </ai_instruction>
 
-Format as JSON
-</ai_instruction>
-```
+Key Features
+------------
+• Markdown-inspired: Clean, simple, and intuitive for both writers and machines.
+• Dual Readability: Combines natural language with precise, machine-executable commands.
+• Safety-First: Prevents recursive processing and potential automation loops.
+• Flexible: Easily integrated into any text-based workflow or project.
+• Extensible: Designed to evolve with expanding AI processing needs.
 
-### Protected Content
-```xml
-<ai_instruction modify="false">
-This content cannot be modified by AI processing
-</ai_instruction>
-```
+Usage
+-----
+Embed MarkAI commands within your text files to instruct AI-powered automation. The tag-based approach ensures that
+each command is processed exactly once while human annotations provide extra context where needed.
 
-## ✨ Key Features
+For detailed information on syntax, processing rules, and integration guidelines, please refer to the full specification document provided with this release.
 
-- 📜 **RFC Standard**: Follows RFC_AI-0001 specification
-- 🎨 **Simple & Standard**: Clear, intuitive tag notation
-- 🔄 **Halting Problem Solution**: Prevents recursive processing loops
-- 👥 **Human-Readable**: Built-in support for human comments
-- 🤖 **Machine-Processable**: Directly parseable by AI systems
-- 🛡️ **Safe Processing**: Protection against recursive processing
-- 🔧 **Flexible**: Works with any text-based content
+License
+-------
+MarkAI is distributed under the MIT License.
 
-## 📚 Specification
-
-For complete technical details, see [RFC_AI-0001](https://github.com/natehouk/RFC_AI-0001-ai-instruction-tag/blob/main/RFC_AI-0001.txt).
-
-## 📄 License
-
-Copyright (C) 2025 Nathaniel J. Houk  
-Licensed under MIT License. See [LICENSE](https://github.com/natehouk/RFC_AI-0001-ai-instruction-tag/blob/main/LICENSE) for details.
+Copyright (C) 2025 Nathaniel J. Houk
