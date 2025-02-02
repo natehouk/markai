@@ -1,4 +1,4 @@
-Request for Comments: AI-0001
+Request for Comments: MARKAI-0001
 Category: Standards Track
 Published: February 2025
 

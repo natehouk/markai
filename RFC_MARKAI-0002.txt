@@ -1,6 +1,6 @@
-Request for Comments: AI-0002
+Request for Comments: MARKAI-0002
 Category: Standards Track
-Published: October 2023
+Published: February 2025
 
          Improvements to AI Instruction Processing
           (Auto Sync and Prompt Control Enhancements)
@@ -14,7 +14,7 @@ Status of this Memo
 
 Copyright Notice
 
-   Copyright (C) 2023 Nathaniel J. Houk. All rights reserved.
+   Copyright (C) 2025 Nathaniel J. Houk. All rights reserved.
    Licensed under the MIT License.
 
 Abstract
