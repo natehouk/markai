@@ -30,3 +30,41 @@ MarkAI uses XML-style tags to encapsulate processing commands alongside human-re
 <ai_instruction>
   Format this text as JSON
 </ai_instruction>
+```
+
+### 2. Command with Human Comments
+```xml
+<ai_instruction>
+  Process the content
+
+  <!--ai-ignore
+  Internal note: This section requires special handling.
+  ai-ignore-->
+
+  Format as JSON
+</ai_instruction>
+```
+
+### 3. Protected Command
+```xml
+<ai_instruction modify="false">
+  This content is locked and cannot be modified by automated processes.
+</ai_instruction>
+```
+
+## Key Features
+
+- **Markdown-Inspired:** Clean, simple, and intuitive for both writers and machines.
+- **Dual Readability:** Seamlessly blends natural language with precise, machine-executable commands.
+- **Safety-First:** Designed with built-in safeguards to ensure reliable automation.
+- **Flexible & Extensible:** Easily integrated into any text-based workflow, with room to evolve alongside your needs.
+
+## Usage
+
+Embed MarkAI commands within your text files to instruct AI-powered automation. This tag-based approach ensures that every command is processed exactly once, while human annotations offer additional context where needed. For complete details on syntax, processing rules, and integration guidelines, please refer to the full specification document provided with this release.
+
+## License
+
+MarkAI is distributed under the MIT License.
+
+&copy; 2025 Nathaniel J. Houk
