@@ -1,9 +1,11 @@
 # MarkAI - Intelligent Instruction Approach
 
-[![RFC](https://img.shields.io/badge/RFC-MARKAI--0001-blue.svg)](https://github.com/natehouk/markai/blob/main/RFC_MARKAI-0001.txt)
-[![RFC](https://img.shields.io/badge/RFC-MARKAI--0002-blue.svg)](https://github.com/natehouk/markai/blob/main/RFC_MARKAI-0002.txt)
+## RFCs
+[![RFC](https://img.shields.io/badge/RFC-MARKAI--0001-orange.svg)](https://github.com/natehouk/markai/blob/main/RFC_MARKAI-0001.txt)
+[![RFC](https://img.shields.io/badge/RFC-MARKAI--0002-orange.svg)](https://github.com/natehouk/markai/blob/main/RFC_MARKAI-0002.txt)
+
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/natehouk/markai/blob/main/LICENSE)
-[![Version](https://img.shields.io/badge/version-1.0-blue.svg)](https://github.com/natehouk/markai/releases)  
+[![Version](https://img.shields.io/badge/version-1.0-blue.svg)](https://github.com/natehouk/markai/releases)
 
 ---
 
