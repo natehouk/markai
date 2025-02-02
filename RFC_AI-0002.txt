@@ -1,0 +1,100 @@
+Request for Comments: AI-0002
+Category: Standards Track
+Published: October 2023
+
+         Improvements to AI Instruction Processing
+          (Auto Sync and Prompt Control Enhancements)
+
+Status of this Memo
+
+   This memo specifies enhancements to the AI instruction processing
+   system. Its purpose is to document the newly added features for 
+   automatic synchronization and user prompt controls. Distribution
+   of this memo is unlimited.
+
+Copyright Notice
+
+   Copyright (C) 2023 Nathaniel J. Houk. All rights reserved.
+   Licensed under the MIT License.
+
+Abstract
+
+   This document introduces new mechanisms to improve the automation and
+   flexibility of AI processing instructions. Key enhancements include:
+   (1) A "sync" command that automatically executes post-interaction tasks
+   (such as staging, committing, and file updates) with minimal user input,
+   and (2) per-instruction control via the prompt attribute that allows the
+   global auto_accept_sync behavior to be overridden on a case-by-case basis.
+   These changes facilitate streamlined workflows and empower developers
+   with finer control over AI-powered operations.
+
+1. Introduction
+
+   The AI instruction processing framework, as initially defined in RFC_AI-0001,
+   provided a robust system for embedding and processing machine-readable
+   instructions interleaved within text. Since the initial release, evolving
+   needs have emerged for smoother integration into development workflows.
+   This RFC introduces the "sync" command—as a shorthand for executing all
+   post-interaction update tasks—and a mechanism to globally control (and, if
+   necessary, override) the automation of these tasks.
+
+2. Enhancements Overview
+
+2.1. Sync Command (cmd=sync)
+   The introduction of the "sync" command is designed to trigger:
+   - Automatic updates to CONSCIOUSNESS.txt, CHANGELOG.txt, TODO.txt,
+     MEMORY.txt, CONTEXT.txt, and ROADMAP.txt.
+   - Execution of staging (git add .) and committing (git commit) commands
+     to record the changes.
+   - These tasks are executed in one unified operation, streamlining the
+     continuous integration process in development.
+
+2.2. Global Auto Acceptance (auto_accept_sync)
+   A global directive (auto_accept_sync: true) has been introduced in the
+   configuration file (.cursorrules) to ensure that when a "sync" command is
+   issued, all associated tasks are automatically performed without a prompt.
+   This establishes a uniform, predictable behavior across all sync operations.
+
+2.3. Prompt Override with <ai_instruction prompt="true/false">
+   In order to allow for flexibility, the <ai_instruction> tag has been enhanced
+   to accept a prompt attribute:
+      • When prompt="false" is provided, the default behavior is maintained.
+      • When prompt="true" is explicitly set, the system will request user confirmation
+        before executing the sync tasks.
+   This per-instruction control ensures that developers can override the global 
+   auto_accept_sync setting on a case-by-case basis when needed.
+
+3. Implementation Requirements
+
+3.1. Global Directive & Command Execution
+   - The system will check the auto_accept_sync flag in .cursorrules.
+   - If set to true, the "sync" command executes without prompting, staging all changes and committing them.
+   - Developers can modify the .cursorrules file at any time to disable or enable auto acceptance.
+
+3.2. Instruction-Level Override
+   - The <ai_instruction> tag may include prompt="true" to force a confirmation prompt.
+   - This override takes precedence over the global auto_accept_sync directive,
+     ensuring that user intent is respected for critical operations.
+
+4. Benefits and Rationale
+
+   These enhancements simplify workflow automation while maintaining flexibility. 
+   Developers benefit from increased productivity by reducing manual prompts, yet they 
+   retain full control when explicit confirmation is required for safety or review.
+   The changes provide a clear, consistent approach to handling automated tasks in AI 
+   processing, aligning with modern development practices and continuous integration pipelines.
+
+5. Security Considerations
+
+   While automation improves efficiency, it is crucial to ensure that all automated 
+   tasks are properly audited. The design of these enhancements includes safeguards 
+   that require explicit user notification (in prompt overrides) to prevent accidental 
+   data loss or unintended commits.
+
+6. Conclusion
+
+   The integration of the "sync" command, global auto_accept_sync, and the prompt 
+   override mechanism represents a significant improvement to the AI instruction 
+   processing system. These changes drive a more efficient development experience 
+   and provide enhanced control for developers interacting with the Smart AI 
+   system. 

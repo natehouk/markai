@@ -1,0 +1,33 @@
+{
+  "name": "markai",
+  "displayName": "MarkAI Extension",
+  "description": "VSCode extension to run the custom checkpoint command for MarkAI integration in Cursor.",
+  "version": "1.0.0",
+  "publisher": "natehouk",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "activationEvents": [
+    "onCommand:markai.runCheckpointCommand"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "markai.runCheckpointCommand",
+        "title": "MarkAI: Checkpoint"
+      }
+    ]
+  },
+  "categories": [
+    "AI"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/natehouk/markai"
+  },
+  "bugs": {
+    "url": "https://github.com/natehouk/markai/issues"
+  },
+  "icon": "images/icon.png"
+} 
