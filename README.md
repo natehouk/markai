@@ -1,13 +1,11 @@
-# MarkAI - Intelligent Instruction Approach
-
-## RFCs
-[![RFC](https://img.shields.io/badge/RFC-MARKAI--0001-orange.svg)](https://github.com/natehouk/markai/blob/main/RFC_MARKAI-0001.txt)
-[![RFC](https://img.shields.io/badge/RFC-MARKAI--0002-orange.svg)](https://github.com/natehouk/markai/blob/main/RFC_MARKAI-0002.txt)
+# MarkAI - AI Instruction Markup, Inspired by Markdown and Built for Automation
 
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/natehouk/markai/blob/main/LICENSE)
 [![Version](https://img.shields.io/badge/version-1.0-blue.svg)](https://github.com/natehouk/markai/releases)
 
----
+## RFCs
+[![RFC](https://img.shields.io/badge/RFC-MARKAI--0001-orange.svg)](https://github.com/natehouk/markai/blob/main/RFC_MARKAI-0001.txt)
+[![RFC](https://img.shields.io/badge/RFC-MARKAI--0002-orange.svg)](https://github.com/natehouk/markai/blob/main/RFC_MARKAI-0002.txt)
 
 ## Description
 
