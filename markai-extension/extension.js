@@ -8,7 +8,7 @@ const vscode = require('vscode');
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
-    const commandId = 'markai.runCheckpointCommand';
+    const commandId = 'markai.checkpoint';
     const disposable = vscode.commands.registerCommand(commandId, () => {
         // Integrate the MarkAI "checkpoint" command functionality
         vscode.window.showInformationMessage('MarkAI Checkpoint Command triggered!');

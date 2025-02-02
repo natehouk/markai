@@ -8,14 +8,21 @@
     "vscode": "^1.60.0"
   },
   "activationEvents": [
-    "onCommand:markai.runCheckpointCommand"
+    "onCommand:markai.checkpoint"
   ],
   "main": "./extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "markai.runCheckpointCommand",
+        "command": "markai.checkpoint",
         "title": "MarkAI: Checkpoint"
+      }
+    ],
+        "keybindings": [
+      {
+        "command": "markai.checkpoint",
+        "key": "ctrl+shift+s",
+        "when": "editorTextFocus"
       }
     ]
   },
