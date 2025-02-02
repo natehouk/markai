@@ -1,0 +1,109 @@
+Request for Comments: AI-0001
+Category: Standards Track
+Published: February 2025
+
+                    AI Instruction Tag Format Specification
+
+Status of this Memo
+
+   This memo documents an AI processing standard. Distribution of this memo
+   is unlimited.
+
+Copyright Notice
+
+   Copyright (C) 2025 Nathaniel J. Houk. All rights reserved.
+   Licensed under MIT License.
+
+Abstract
+
+   This document specifies a standardized format for embedding machine-
+   readable AI processing instructions within text files. The format
+   uses XML-style tags for instructions and HTML-style comments for human
+   annotations, providing both machine processability and human
+   readability while preventing recursive processing issues.
+
+1. Introduction
+
+   The increasing use of AI systems in text processing has created a need
+   for a standardized way to embed processing instructions within text
+   files. This document specifies such a format.
+
+1.1. The Halting Problem and AI Processing
+
+   A fundamental challenge in AI instruction processing is the potential
+   for recursive interpretation - where an AI system processes instructions
+   about processing instructions, potentially leading to an infinite loop.
+   This is a practical manifestation of the halting problem in computer
+   science.
+
+   The format addresses this challenge through the ai-ignore comment
+   syntax, which creates explicit boundaries between processable
+   instructions and human meta-commentary. This prevents AI systems from
+   recursively processing comments about processing, while maintaining
+   the ability for humans to document and explain the instructions.
+
+2. Core Format
+
+2.1. AI Instruction Tag
+    <ai_instruction>
+    [instruction content]
+    </ai_instruction>
+
+    Optional: Prevent modification
+    <ai_instruction modify="false">
+    [protected content]
+    </ai_instruction>
+
+2.2. Human Comments
+    <!--ai-ignore
+    [human comment content]
+    ai-ignore-->
+
+3. Processing Rules
+
+3.1. Basic Requirements
+- Process each instruction tag exactly once
+- Never process nested instruction tags
+- Skip all content within ai-ignore comments
+- Honor modify="false" directives
+- Stop if processing depth exceeds 5 levels
+
+3.2. Error Handling
+- Skip malformed tags
+- Only process outermost tag when nested
+- Treat invalid attributes as modify="false"
+
+4. Usage Guidelines
+
+4.1. Writing Instructions
+- Use clear, unambiguous language
+- One instruction per tag
+- Add human comments for context
+- Avoid nesting instructions
+
+4.2. Writing Comments
+- Use comments to explain "why"
+- Keep comments current
+- Document dependencies
+- Explain complex requirements
+
+5. Examples
+
+Basic Instruction:
+<ai_instruction>
+Format this text as JSON
+</ai_instruction>
+
+With Human Comment:
+<ai_instruction>
+Format this text
+<!--ai-ignore
+This needs special formatting for legacy systems
+ai-ignore-->
+as JSON
+</ai_instruction>
+
+Protected Content:
+<ai_instruction modify="false">
+Do not modify this instruction
+</ai_instruction>
