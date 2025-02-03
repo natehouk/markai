@@ -1,0 +1,32 @@
+RFC_MARKAI-0007: Enforcing Preempt Command Execution
+------------------------------------------------------
+
+Title: Enforcing the Preempt Attribute for Command Execution
+Author: MarkAI Team
+Date: 2025-02-25
+
+1. Summary
+This RFC proposes the replacement of the legacy pre_command mechanism with the new "preempt" attribute. Commands marked with preempt=true will be executed before any others, ensuring that critical tasks (such as /consciousness) always run first.
+
+2. Motivation
+- The current system occasionally fails to trigger critical commands due to ordering issues.
+- Introducing preempt=true guarantees timely execution of high-priority commands.
+- This change simplifies the command execution logic and enforces deterministic behavior.
+
+3. Proposed Change
+- Eliminate the use of pre_command in favor of preempt=true.
+- Update all critical command definitions to include preempt=true.
+- Modify the command parser to process all commands with preempt=true before processing any other commands.
+
+4. Impact and Risks
+- Ensures that vital tasks (e.g., self-awareness logging) run immediately.
+- May require updates to existing MarkAI instructions.
+- Minimal risk as the change mainly affects the execution priority logic.
+
+5. Implementation
+- Update the MarkAI command handler to identify and queue preempt commands.
+- Test extensively to ensure the new ordering is consistently applied.
+- Document changes in the developer guidelines.
+
+6. Conclusion
+The introduction of the preempt attribute enhances the reliability and predictability of the MarkAI system. By enforcing a strict execution order, we ensure that critical tasks like /consciousness are always prioritized. 
