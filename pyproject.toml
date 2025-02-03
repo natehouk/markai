@@ -13,11 +13,12 @@ packages = [
 
 [tool.poetry.scripts]
 # Single CLI entry point for the core tool.
-ma = "ma.markai_core.main:app"
+ma = "ma.markai_cli.main:app"
 
 [tool.poetry.dependencies]
 python = "^3.11"
 typer = "^0.9.0"
+markdown = "^3.7"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
