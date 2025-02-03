@@ -1,4 +1,5 @@
 # MarkAI Project
+*AI Instruction Markup, inspired by Markdown and Built for Automation*
 
 **MarkAI** is a revolutionary tool that transforms mundane documentation into dynamic, interactive workflows — marrying the clarity of Markdown with the power of AI automation. Whether you're a developer, technical writer, or automation enthusiast, MarkAI turns static documents into engines of productivity and creativity.
 
