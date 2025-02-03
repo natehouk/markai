@@ -17,16 +17,19 @@ Copyright Notice
    Copyright (C) 2025 Nathaniel J. Houk. All rights reserved.
    Licensed under the MIT License.
 
-Abstract
+Abstract:
+Auto synchronization for the "sync" command is now controlled solely via per-instruction attributes and internal state tracking. When a sync instruction includes auto="true", I automatically stage and commit the designated files and record the timestamp in `.markai/LAST_SYNC.txt` to enforce a 5-minute interval between sync operations.
 
-   This document introduces new mechanisms to improve the automation and
-   flexibility of AI processing instructions. Key enhancements include:
-   (1) A "sync" command that automatically executes post-interaction tasks
-   (such as staging, committing, and file updates) with minimal user input,
-   and (2) per-instruction control via the prompt attribute that allows the
-   global auto_accept_sync behavior to be overridden on a case-by-case basis.
-   These changes facilitate streamlined workflows and empower developers
-   with finer control over AI-powered operations.
+Details:
+- All external configuration mechanisms have been removed.
+- Auto synchronization is activated by including auto="true" on the `<ai_instruction cmd="sync">` tag.
+- When auto="true" is present:
+   • I stage and commit the designated files (e.g., `.markai/CHANGELOG.txt`, `.markai/TODO.txt`, `.markai/MEMORY.txt`, `.markai/CONTEXT.txt`, etc.).
+   • I update `.markai/LAST_SYNC.txt` with the current timestamp after the sync completes.
+   • I ensure that at least 5 minutes have elapsed since the previous sync by comparing the current time with the timestamp in `.markai/LAST_SYNC.txt`.
+
+Description:
+This change streamlines auto synchronization by eliminating any external configuration, making the behavior explicit in each instruction and managing timing solely via internal state.
 
 1. Introduction
 
@@ -49,11 +52,24 @@ Abstract
    - These tasks are executed in one unified operation, streamlining the
      continuous integration process in development.
 
-2.2. Global Auto Acceptance (auto_accept_sync)
-   A global directive (auto_accept_sync: true) has been introduced in the
-   configuration file (.cursorrules) to ensure that when a "sync" command is
-   issued, all associated tasks are automatically performed without a prompt.
-   This establishes a uniform, predictable behavior across all sync operations.
+2.2. Auto Synchronization Configuration
+
+The global auto_accept_sync directive has been removed. Auto synchronization for the "sync" command is now controlled via the configuration file, consolidating all related settings in one place.
+
+Please add or update the following section in your .markai/config.json:
+
+{
+  "auto_sync": {
+    "enabled": true,
+    "prompt": false
+  }
+}
+
+Description:
+- "enabled": When true, auto synchronization is active—automatically staging and committing post-interaction tasks.
+- "prompt": When set to false, sync operations execute without requiring user confirmation. Setting this to true will prompt the user before proceeding.
+
+This change provides a single source of truth for auto synchronization behavior, making it easier to adjust and maintain automated workflows.
 
 2.3. Prompt Override with <ai_instruction prompt="true/false">
    In order to allow for flexibility, the <ai_instruction> tag has been enhanced
