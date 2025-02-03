@@ -1,1 +1,61 @@
- 
+MARKAI Instruction Processing Specification
+Version: 1.1.0
+Last Updated: 2025-03-20
+
+Overview:
+This document serves as the comprehensive specification for the MarkAI instruction processing system. It aggregates all relevant RFCs and system requirements governing the parsing, execution, and security of embedded AI instructions throughout the repository.
+
+1. Command Syntax and Formatting
+----------------------------------
+- **Slash Prefix Requirement:**  
+  All command identifiers used within <ai_instruction> tags must begin with a forward slash ('/').  
+  Example:
+    • Correct: <ai_instruction cmd="/sync" ...>
+    • Incorrect: <ai_instruction cmd="sync" ...>
+- This change is detailed in RFC_MARKAI-0006 and applies to every instruction across the repository.
+
+2. Instruction Attributes and Directives
+------------------------------------------
+- **Locked Content:**  
+  Instructions marked with the `locked="true"` attribute are immutable and must not be modified. See RFC_MARKAI-0001 and RFC_MARKAI-0003 for additional guidance.
+  
+- **Auto-Sync and Timing:**  
+  The auto-sync mechanism triggers when the `auto="true"` attribute is present or when more than 5 minutes have elapsed since the last successful sync (recorded in .markai/LAST_SYNC.txt).
+  
+- **Human-Readable Annotations:**  
+  Content within `<!--ai-ignore ... ai-ignore-->` blocks is for human reference and is excluded from automated processing.
+
+3. Processing Workflow
+------------------------
+- **Parsing and Validation:**  
+  The system recursively scans repository files to extract <ai_instruction> commands. Each extracted command is validated to ensure it adheres to the required syntax, including the mandatory leading slash.
+  
+- **File Updates and Automation:**  
+  Upon validation, the system updates key log and configuration files (e.g., CONSCIOUSNESS.txt, CHANGELOG.txt, TODO.txt, MEMORY.txt, CONTEXT.txt, ROADMAP.txt) and executes relevant staging and commit operations as defined in prior RFCs (notably RFC_MARKAI-0002).
+
+4. Security and Compliance
+----------------------------
+- **Immutability Requirements:**  
+  Commands using the `locked` attribute or elevated security settings (e.g., `security="ring0"`) are strictly protected. Any unauthorized modification attempts must be rejected.
+  
+- **Transition Period for Legacy Commands:**  
+  During an established deprecation phase, commands that do not follow the slash prefix rule will trigger warnings before full enforcement is applied.
+
+5. Historical RFC References
+-----------------------------
+- **RFC_MARKAI-0001:** Initial guidelines on instruction processing and immutability.
+- **RFC_MARKAI-0002:** Introduction of the sync command and automation procedures.
+- **RFC_MARKAI-0003:** Enhancements for attribute handling and security enforcement.
+- **RFC_MARKAI-0004:** Clarifications and test cases for command processing.
+- **RFC_MARKAI-0005:** Updates on integration and code review processes.
+- **RFC_MARKAI-0006:** Enforcing the leading slash for all AI instruction commands.
+
+6. Versioning and Maintenance
+------------------------------
+- The specification follows semantic versioning.
+- Each update to the specification is accompanied by a corresponding version number increment.
+- This document should be reviewed and revised periodically to ensure alignment with ongoing developments and best practices.
+
+7. Conclusion
+-------------
+Adherence to this specification ensures robust, consistent, and secure processing of AI-powered commands within the system. All development and automation efforts must comply with these guidelines to maintain the integrity and operational consistency of the MarkAI instruction processing framework. 

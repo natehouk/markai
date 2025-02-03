@@ -1,0 +1,42 @@
+RFC: MARKAI-0006
+Title: Enforcing Slash Prefix in AI Instruction Commands
+Category: Standards Track
+Published: March 2025
+
+Abstract:
+This RFC proposes a modification to the AI instruction processing system by enforcing that all command identifiers within <ai_instruction> tags begin with a forward slash ('/'). This change enhances clarity, reduces ambiguities during parsing, and ensures a consistent command syntax across the repository.
+
+1. Introduction
+The current system processes command identifiers based on the 'cmd' attribute within <ai_instruction> tags. However, over time it became apparent that allowing commands to be specified without a distinctive prefix can lead to unintended interpretations. By requiring a leading slash (e.g., /sync, /bootstrap, /consciousness), we make it explicit that the token represents a command rather than arbitrary text.
+
+2. Motivation
+- Enhanced Clarity: A slash prefix clearly marks a string as an executable command.
+- Reduced Ambiguity: Ensures that only intentionally specified commands are processed.
+- Consistency: Enforces a uniform standard across configuration files, scripts, and embedded instructions.
+- Improved Developer Experience: Makes commands immediately identifiable during both code review and automated processing.
+
+3. Proposed Changes
+- Every AI instruction command must include a leading slash in its cmd attribute.
+  Examples:
+    • Replace <ai_instruction cmd="sync" …> with <ai_instruction cmd="/sync" …>
+    • Replace <ai_instruction cmd="bootstrap" …> with <ai_instruction cmd="/bootstrap" …>
+    • Similarly update commands such as consciousness, checkpoint, safety, version, deps, perf, error, debug, evolve, pre_command, etc.
+- This change applies to all instruction tags across:
+    • .markairules and .cursorrules files
+    • Embedded configuration blocks and automation scripts
+- The processing logic will be updated to validate that every command starts with a '/' and to flag any legacy commands that do not conform.
+
+4. Implementation Requirements
+- Update the parsing and validation routines to require a leading slash in the cmd attribute.
+- Refactor existing instruction definitions across all repository files accordingly.
+- Introduce a transitional period during which non-prefixed commands may trigger deprecation warnings before being fully disallowed.
+- Adjust automated tests and documentation to reflect the new command syntax.
+
+5. Backwards Compatibility
+During a defined deprecation period, commands lacking the slash prefix may still be processed with a warning. However, after this period all commands must strictly include the slash. Developers are expected to update their implementations immediately.
+
+6. Security Considerations
+Introducing a slash prefix does not affect the underlying security or immutability features of commands. Rather, it reduces the risk of misinterpreting text as a command, thereby enhancing the overall robustness of the instruction processing system.
+
+7. Conclusion
+Mandating a leading slash for all command identifiers in <ai_instruction> tags brings improved clarity and consistency to the system. This update, formalized in RFC_MARKAI-0006, aligns our command syntax with modern best practices and ensures precise parsing and execution of AI instructions. 
