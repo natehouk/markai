@@ -2,7 +2,7 @@ import re
 import logging
 from pathlib import Path
 from datetime import datetime
-from plugins import PluginManager
+from ma.plugins import PluginManager
 
 plugin_manager = PluginManager()  # Global instance for plugin management
 
