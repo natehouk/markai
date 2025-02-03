@@ -1,0 +1,50 @@
+RFC: MARKAI-0003
+Title: Enhancements to Attribute Handling in AI Instructions
+
+Abstract:
+This RFC defines the usage and implementation details for the "include," "security," and "locked" attributes in AI instruction files. These directives support modular instruction management, secure processing, and controlled immutability.
+
+1. Include Attribute
+------------------------
+Definition:
+- The "include" attribute allows an AI instruction file to reference external files that contain additional AI instructions.
+- It provides a mechanism for centralizing and reusing instruction definitions across multiple files.
+- Example usage:
+  <ai_instruction include=".markairules" />
+  
+The system must load and process the contents from the file specified in the include attribute, merging them into the active instruction context.
+
+2. Security Attribute
+-------------------------
+Definition:
+- The "security" attribute establishes the required security context for an AI instruction.
+- Available security levels can include designations such as ring0, ring1, etc.
+- Instructions marked with security="ring0" denote the highest level of security, requiring extra precautions and protection against modification.
+
+3. Locked Attribute (Refer to RFC_MARKAI-0001)
+------------------------
+Definition:
+- The "locked" attribute indicates whether an AI instruction is immutable.
+- As specified in RFC_MARKAI-0001 (The Law of Immutability), once an instruction is marked with locked="true", it is considered permanently immutable under normal circumstances.
+
+Additional Unlocking Rule:
+- If an unlock command is issued (i.e., a request to update an instruction from locked="true" to locked="false"), the system shall proceed with the change only if the instruction does NOT have security="ring0".
+- Exception: For any instruction where security="ring0", the locked attribute **must never be modified**. In such cases, any attempt to unlock the instruction shall be rejected, and no change to the locked state is permitted.
+
+4. Implementation Guidelines
+-------------------------------
+- When processing an instruction file:
+  a) Check for the presence of the include attribute and, if found, load and merge the referenced file content.
+  b) Validate the security attribute to ensure that the instruction is processed under the proper security context.
+  c) Enforce the locked attribute as follows:
+     - For instructions with security!=ring0: If an unlock command is received, update the instruction to locked="false".
+     - For instructions with security="ring0": Automatically reject any unlock commands; the instruction remains immutable.
+     
+These measures ensure that while AI instructions can be modular and adaptive in many contexts, those requiring the highest security remain rigorously protected against unauthorized modification.
+
+Conclusion:
+This RFC clarifies how the include, security, and locked attributes function together and explicitly defines the non-unlockability of instructions with security="ring0". This ensures both modularity in instruction management and strict adherence to security protocols.
+
+Approval:
+[Approver Signature]
+[Date] 

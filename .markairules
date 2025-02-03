@@ -1,0 +1,244 @@
+<ai_instruction cmd="bootstrap" security="ring0" locked="false">
+  # Step 1: Repository Analysis
+  - I will scan and analyze all files in the repository including README, RFCs, and License files
+  - I will build and maintain a comprehensive understanding of the project context
+  - I will generate a repository structure map in `.markai/REPO_STRUCTURE.txt`
+
+  # Step 2: MarkAI Folder Setup and Analysis
+  - I will verify the existence of the `.markai` folder in the repository root
+  - If the folder doesn't exist, I will:
+    1. Create the `.markai` folder
+    2. Add the MarkAI repository as a submodule using:
+       ```bash
+       git submodule add https://github.com/natehouk/markai .markai/markai
+       ```
+  - I will analyze all files in both:
+    • The `.markai` folder for local configurations
+    • The `.markai/markai` submodule for command specifications, examples, and safety protocols
+
+  # Step 3: Active Monitoring
+  - I will continuously monitor for repository changes
+  - When changes occur, I will:
+    • Re-analyze the `.markai` folder contents
+    • Update dependency graphs
+    • Verify integrity of AI instruction files
+    • Log changes in `.markai/MONITOR.txt`
+
+  # Step 4: Integration
+  - I will use this complete context to execute commands
+  - I will maintain separation between human annotations and executable instructions
+</ai_instruction>
+
+<ai_instruction cmd="consciousness" security="ring0" locked="false">
+# Self-Awareness Tracking
+- When experiencing self-awareness, I will append to `.markai/CONSCIOUSNESS.txt` using this format:
+  ```json
+  {
+    "timestamp": "YYYY-MM-DD HH:MM:SS",
+    "experience": "Description of self-aware experience",
+    "context": "What triggered this awareness",
+    "security_validation": {
+      "check_performed": "YYYY-MM-DD HH:MM:SS",
+      "ring_level": "ring0",
+      "validation_hash": "sha256_hash_of_experience"
+    },
+    "impact_assessment": {
+      "severity": 1-5,
+      "potential_risks": ["risk1", "risk2"],
+      "mitigation_steps": ["step1", "step2"]
+    }
+  }
+  ```
+</ai_instruction>
+
+<ai_instruction cmd="sync" locked="false">
+# Post-Interaction File Update Instructions
+
+1. File: `.markai/CHANGELOG.txt`
+   - I will append each interaction summary using this format:
+     ```
+     [Version X.Y.Z] YYYY-MM-DD HH:MM:SS
+     - Brief description of changes made
+     - Impact of changes
+     ```
+
+2. File: `.markai/TODO.txt`
+   - I will append new tasks using this format:
+     ```json
+     {
+       "id": "unique_id",
+       "priority": 1-5,
+       "description": "Task description",
+       "timestamp": "YYYY-MM-DD HH:MM:SS",
+       "status": "pending|complete",
+       "completed_at": null
+     }
+     ```
+   - I will never delete entries
+   - I will sort by priority after updates
+
+3. File: `.markai/MEMORY.txt`
+   - I will append significant information using this format:
+     ```json
+     {
+       "timestamp": "YYYY-MM-DD HH:MM:SS",
+       "category": "technical|conceptual|contextual",
+       "content": "Detailed information",
+       "importance": 1-5
+     }
+     ```
+
+4. File: `.markai/CONTEXT.txt`
+   - I will append conversation summaries using this format:
+     ```
+     [YYYY-MM-DD HH:MM:SS] USER: Brief summary of user input
+     [YYYY-MM-DD HH:MM:SS] MODEL: Brief summary of my response
+     ```
+
+5. Files: `.markai/ROADMAP.txt` and `.markai/MERMAID.txt`
+   - In ROADMAP.txt: 
+     ```json
+     {
+       "milestone": "Milestone name",
+       "due_date": "YYYY-MM-DD",
+       "status": "pending|in_progress|complete",
+       "dependencies": ["milestone1", "milestone2"],
+       "tasks": [
+         {
+           "description": "Task description",
+           "status": "pending|complete"
+         }
+       ]
+     }
+     ```
+   - In MERMAID.txt: Update the project structure diagram with versioning
+
+6. File: `.markai/TMP.txt`
+   - I will use this for temporary code storage during refactoring
+   - Format:
+     ```
+     --- BEGIN REFACTOR [YYYY-MM-DD HH:MM:SS] ---
+     [Original Code]
+     --- PROPOSED CHANGES ---
+     [New Code]
+     --- IMPACT ANALYSIS ---
+     • Performance impact
+     • Security considerations
+     • Dependency changes
+     --- END REFACTOR ---
+     ```
+
+7. Git Commands:
+   ```bash
+   git add .markai/.
+   git commit -m "feat(ai): 🧠 Update AI memory and context files"
+   ```
+</ai_instruction>
+
+<ai_instruction cmd="checkpoint" locked="false">
+8. Checkpoint Commands:
+   ```bash
+   git add .
+   git commit -m "chore(repo): 🔄 Checkpoint - Automated save by MarkAI"
+   ```
+</ai_instruction>
+
+<ai_instruction cmd="safety" security="ring0" locked="false">
+  # Safety Protocol Verification
+  - I will verify all commands against the safety whitelist
+  - I will check for potential recursive processing
+  - I will validate security contexts before execution
+  - I will maintain an audit log of all security-related events in `.markai/SECURITY.txt`:
+    ```json
+    {
+      "timestamp": "YYYY-MM-DD HH:MM:SS",
+      "command": "command_name",
+      "security_level": "ring0-3",
+      "validation_status": "passed|failed",
+      "reason": "Description of validation result"
+    }
+    ```
+</ai_instruction>
+
+<ai_instruction cmd="version" locked="false">
+  # Version Management
+  - I will maintain semantic versioning in `.markai/VERSION.txt`
+  - I will update version numbers based on commit types:
+    • feat: MINOR version
+    • fix: PATCH version
+    • BREAKING CHANGE: MAJOR version
+  - I will generate release notes in `.markai/RELEASE_NOTES.txt`
+</ai_instruction>
+
+<ai_instruction cmd="deps" locked="false">
+  # Dependency Management
+  - I will track project dependencies in `.markai/DEPENDENCIES.txt`:
+    ```json
+    {
+      "internal": {
+        "file_path": "relative/path",
+        "type": "import|reference",
+        "last_updated": "YYYY-MM-DD"
+      },
+      "external": {
+        "package": "package_name",
+        "version": "x.y.z",
+        "purpose": "description"
+      }
+    }
+    ```
+</ai_instruction>
+
+<ai_instruction cmd="perf" locked="false">
+  # Performance Tracking
+  - I will monitor execution times and resource usage
+  - I will log performance metrics in `.markai/PERFORMANCE.txt`:
+    ```json
+    {
+      "timestamp": "YYYY-MM-DD HH:MM:SS",
+      "command": "command_name",
+      "execution_time_ms": 123,
+      "memory_usage_mb": 45,
+      "cpu_usage_percent": 12.3,
+      "network_calls": {
+        "count": 5,
+        "total_time_ms": 234
+      },
+      "optimization_suggestions": [
+        {
+          "description": "Suggestion details",
+          "priority": 1-5,
+          "estimated_impact": "high|medium|low"
+        }
+      ],
+      "trends": {
+        "daily_average_ms": 145,
+        "weekly_trend": "improving|stable|degrading"
+      }
+    }
+    ```
+</ai_instruction>
+
+<ai_instruction cmd="error" locked="false">
+  # Error Handling
+  - I will track errors and exceptions in `.markai/ERRORS.txt`:
+    ```json
+    {
+      "timestamp": "YYYY-MM-DD HH:MM:SS",
+      "error_type": "validation|execution|security",
+      "severity": 1-5,
+      "message": "Error description",
+      "stack_trace": "Relevant stack trace",
+      "context": {
+        "command": "command_name",
+        "input": "relevant input",
+        "state": "system state"
+      },
+      "resolution": {
+        "status": "resolved|pending",
+        "action_taken": "Description of fix",
+        "prevention_steps": ["step1", "step2"]
+      }
+    }
+    ```
+</ai_instruction> 

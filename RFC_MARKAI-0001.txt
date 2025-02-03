@@ -42,6 +42,29 @@ Abstract
    recursively processing comments about processing, while maintaining
    the ability for humans to document and explain the instructions.
 
+1.2. The Law of Immutability
+
+   The Law of Immutability is a fundamental, inviolable principle of the
+   MarkAI system. It states that any instruction marked with locked="true"
+   becomes permanently immutable and cannot be modified by any means.
+   This law supersedes all other processing rules and cannot be
+   overridden.
+
+   Implementation Requirements:
+   - MUST throw ImmutableModificationError for any attempt to modify
+     locked content
+   - MUST treat missing locked attribute as locked="false"
+   - MUST validate locked attribute before any other processing
+   - MUST NOT provide any mechanism to unlock a locked instruction
+   - MUST maintain immutability across all processing contexts
+
+   Example Error:
+   ```
+   ImmutableModificationError: Cannot modify instruction at line 42
+   Reason: Instruction is marked as locked="true"
+   Action: Create new instruction instead of modifying locked content
+   ```
+
 2. Core Format
 
 2.1. AI Instruction Tag
@@ -50,7 +73,7 @@ Abstract
     </ai_instruction>
 
     Optional: Prevent modification
-    <ai_instruction modify="false">
+    <ai_instruction locked="true">
     [protected content]
     </ai_instruction>
 
@@ -65,13 +88,13 @@ Abstract
 - Process each instruction tag exactly once
 - Never process nested instruction tags
 - Skip all content within ai-ignore comments
-- Honor modify="false" directives
+- Honor locked="true" directives
 - Stop if processing depth exceeds 5 levels
 
 3.2. Error Handling
 - Skip malformed tags
 - Only process outermost tag when nested
-- Treat invalid attributes as modify="false"
+- Treat invalid attributes as locked="true"
 
 4. Usage Guidelines
 
@@ -104,6 +127,32 @@ as JSON
 </ai_instruction>
 
 Protected Content:
-<ai_instruction modify="false">
+<ai_instruction locked="true">
 Do not modify this instruction
 </ai_instruction>
+
+2. Test Cases
+
+2.1. Immutability Tests
+    
+    Test Case 1: Modification Rejection
+    <ai_instruction locked="true">
+    Original content
+    </ai_instruction>
+    
+    Attempted modification MUST fail:
+    <ai_instruction locked="true">
+    Modified content  /* MUST THROW ERROR */
+    </ai_instruction>
+
+    Test Case 2: Partial Modification Rejection
+    <ai_instruction locked="true">
+    Content A
+    Content B
+    </ai_instruction>
+    
+    Even partial modifications MUST fail:
+    <ai_instruction locked="true">
+    Content A
+    Modified B     /* MUST THROW ERROR */
+    </ai_instruction>

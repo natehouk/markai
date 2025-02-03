@@ -47,7 +47,7 @@ MarkAI uses XML-style tags to encapsulate processing commands alongside human-re
 
 ### 3. Protected Command
 ```xml
-<ai_instruction modify="false">
+<ai_instruction locked="true">
   This content is locked and cannot be modified by automated processes.
 </ai_instruction>
 ```
