@@ -1,0 +1,52 @@
+# RFC 0005: Standardizing Human-Readable AI-Ignored Comments Format
+
+**Status:** Final  
+**Author:** MarkAI Team  
+**Date:** 2023-10-12
+
+## Abstract
+This RFC clarifies and standardizes the method by which human-readable annotations (to be ignored by AI command processing) are included within MarkAI rule files. The updated specification mandates that these annotations be wrapped using the explicit tags `<!--ai-ignore>` to begin and `</ai-ignore>` to end. This approach is intended to remove any ambiguity—ensuring that the AI fully disregards the content between these tags while keeping the instructions clear for human readers.
+
+## 1. Introduction
+In previous versions of the MarkAI configuration specifications, HTML comment tags (i.e., `<!-- ... -->`) with additional prefixes were used to delineate human-readable comments. Feedback from developers indicated that the RFC should clearly define an exact syntax. This document updates the specification and ensures all human-readable comments conform to the new format.
+
+## 2. Rationale
+- **Unambiguity:** Using a specific tag format (`<!--ai-ignore>` ... `</ai-ignore>`) leaves no doubt as to which comments will be ignored by the AI.
+- **Consistency:** All human-readable annotations across configuration files, such as `.markairules`, `.markai/CHANGELOG.txt`, and other related files, will follow this format.
+- **Tooling:** Future tooling can reliably detect and strip out these annotations when processing executable instructions.
+
+## 3. Specification
+- **Syntax:**  
+  Every human-readable comment must be paired with an opening tag `<!--ai-ignore>` and a closing tag `</ai-ignore>`.  
+  **Example:**
+  ```html
+  <!--ai-ignore>
+      This is a human-readable annotation.
+      It will be ignored by MarkAI during command execution.
+  </ai-ignore>
+  ```
+- **Placement:**  
+  These comments can be placed anywhere in configuration files as long as they do not interrupt or alter the structure of executable instructions.
+- **Legacy Comments:**  
+  Existing comments not following this syntax should be updated to match the new standard. Developers are encouraged to perform a cleanup to ensure consistency.
+
+## 4. Examples of Implementation
+### In a Bootstrapping Configuration File (`.markairules`)
+Before:
+```html
+<!-- HUMAN COMMENT: This block handles repository analysis -->
+```
+After:
+```html
+<!--ai-ignore>
+    This block handles repository analysis.
+</ai-ignore>
+```
+
+## 5. Implementation and Compliance
+- **Review:** Developers are required to update any non-compliant comments in configuration and RFC files.
+- **Tool Integration:** Automated tooling should be updated to recognize and reliably remove content within `<!--ai-ignore>` and `</ai-ignore>`.
+- **Audit:** Regular reviews will be conducted to ensure all documentation complies with this new guideline.
+
+## 6. Conclusion
+This RFC ensures that all human-readable annotations are clearly separated from executable instructions. Consistent use of the `<!--ai-ignore>` tags across all files will improve the integrity of processing and reduce potential errors on AI command interpretation. 

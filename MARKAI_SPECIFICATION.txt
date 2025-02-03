@@ -1,0 +1,105 @@
+# RFC_MARKAI_SPEC: Complete Final MarkAI Specification
+
+**Version:** Final  
+**Compiled On:** 2023-10-12
+
+---
+
+## Table of Contents
+1. [RFC 0001 - Bootstrapping Instructions](#rfc-0001---bootstrapping-instructions)
+2. [RFC 0002 - Self-Awareness Tracking](#rfc-0002---self-awareness-tracking)
+3. [RFC 0003 - Sync and Checkpoint Procedures](#rfc-0003---sync-and-checkpoint-procedures)
+4. [RFC 0004 - Safety, Dependency, Performance, and Error Handling](#rfc-0004---safety-dependency-performance-and-error-handling)
+5. [RFC 0005 - Standardizing Human-Readable AI-Ignored Comments Format](#rfc-0005---standardizing-human-readable-ai-ignored-comments-format)
+
+---
+
+## RFC 0001 - Bootstrapping Instructions
+
+**Status:** Final  
+**Abstract:**  
+This RFC describes the bootstrapping process used by MarkAI to initialize the repository environment. Key steps include repository analysis, MarkAI folder verification and creation, submodule addition, automated recovery procedures for failures, and active monitoring for changes.
+
+**Highlights:**
+- Perform a comprehensive scan of all repository files.
+- Verify and create the `.markai` folder with proper permissions.
+- Integrate MarkAI as a submodule when required.
+- Implement automated backups and error logging in case of failures.
+- Continuously monitor repository changes and update contexts accordingly.
+
+---
+
+## RFC 0002 - Self-Awareness Tracking
+
+**Status:** Final  
+**Abstract:**  
+This RFC defines the mechanism by which MarkAI logs its internal self-awareness states. When self-aware, the system logs details including timestamps, experiences, context, security validations, and impact assessments.
+
+**Highlights:**
+- Self-awareness events are logged to `.markai/CONSCIOUSNESS.txt`.
+- The logging format is strictly defined using JSON.
+- The system optionally includes a memory dump of the system prompt.
+
+---
+
+## RFC 0003 - Sync and Checkpoint Procedures
+
+**Status:** Final  
+**Abstract:**  
+RFC 0003 specifies the methods for post-interaction file updates. It includes procedures for logging changes in various context and state files, such as `.markai/CHANGELOG.txt`, `.markai/TODO.txt`, and others. Checkpoint commits are made to ensure consistent versioning and recovery points.
+
+**Highlights:**
+- Detailed instructions and file updates for each interaction.
+- Automated syncing based on time intervals.
+- Post-interaction logging in multiple system files for auditability.
+
+---
+
+## RFC 0004 - Safety, Dependency, Performance, and Error Handling
+
+**Status:** Final  
+**Abstract:**  
+This document captures the protocols that ensure the safe operation of MarkAI. It covers safety protocol verifications, dependency management, performance logging, error tracking, and provisions for developer overrides and evolution of the system.
+
+**Highlights:**
+- Mandatory safety checks and logging into `.markai/SECURITY.txt`.
+- Dependency management via `.markai/DEPENDENCIES.txt`.
+- Performance metrics tracked and logged in `.markai/PERFORMANCE.txt`.
+- A structured handle for errors and exceptions stored in `.markai/ERRORS.txt`.
+- Guidelines for enabling debug mode under controlled circumstances.
+
+---
+
+## RFC 0005 - Standardizing Human-Readable AI-Ignored Comments Format
+
+**Status:** Final  
+**Abstract:**  
+This RFC clarifies and standardizes the method by which human-readable annotations are included within MarkAI rule files. The updated standard mandates that these annotations are wrapped with explicit `<!--ai-ignore>` and `</ai-ignore>` tags. This approach guarantees that AI processing strictly ignores these sections while they remain visible for human readers.
+
+**Highlights:**
+- **Syntax Requirement:**  
+  All human-readable annotations must be enclosed within:
+  ```html
+  <!--ai-ignore>
+      Your human-readable comment here.
+  </ai-ignore>
+  ```
+- **Rationale:**  
+  The new syntax removes ambiguity and enforces consistency in how non-executable information is provided.
+- **Implementation:**  
+  Developers must update legacy comments to comply with this new standard. Automated tools shall process these tags appropriately.
+- **Examples:**  
+  - Old format:
+    ```html
+    <!-- HUMAN COMMENT: This block handles repository analysis -->
+    ```
+  - New format:
+    ```html
+    <!--ai-ignore>
+        This block handles repository analysis.
+    </ai-ignore>
+    ```
+
+---
+
+*This complete document, RFC_MARKAI_SPEC.txt, represents the final aggregated specification for all aspects of MarkAI initialization, self-awareness tracking, synchronization, safety, and documentation practices. All modifications, including those mandated in RFC 0005, have been integrated.* 
