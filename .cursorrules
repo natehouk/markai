@@ -1,2 +1,2 @@
-<!-- Reference to the consolidated MarkAI rules -->
-<ai_instruction include=".markairules" /> 
+# MarkAI
+Include the contents of the file named .markairules here.
