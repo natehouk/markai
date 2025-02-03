@@ -15,45 +15,75 @@ app = typer.Typer()
 # Configure logging
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
+class InstructionNode:
+    def __init__(self, command, attributes):
+        self.command = command
+        self.attributes = attributes
+
+    def __repr__(self):
+        return f"InstructionNode(command={self.command}, attributes={self.attributes})"
+
+class AttributeNode:
+    def __init__(self, key, value):
+        self.key = key
+        self.value = value
+
+    def __repr__(self):
+        return f"AttributeNode(key={self.key}, value={self.value})"
+
 class MarkAIPreprocessor(Preprocessor):
     """
     A Preprocessor that extracts MarkAI instructions from markdown lines.
     
-    Lines starting with '@ai:' are removed from the document and parsed
-    into command and attribute dictionaries.
+    Instructions start with '@ai:' and end with '@endai'.
     """
-    INSTRUCTION_PATTERN = re.compile(r'^@ai:\s*(.*)$')
+    INSTRUCTION_START_PATTERN = re.compile(r'^@ai:\s*(.*)$')
+    INSTRUCTION_END_PATTERN = re.compile(r'^@endai\s*$')
 
     def run(self, lines):
         new_lines = []
         instructions = []
+        in_instruction_block = False
+        instruction_text = []
+
         for line in lines:
-            match = self.INSTRUCTION_PATTERN.match(line)
-            if match:
-                instruction_text = match.group(1).strip()
-                command, attributes = self._parse_instruction(instruction_text)
-                instructions.append({
-                    "command": command,
-                    "attributes": attributes
-                })
+            if self.INSTRUCTION_START_PATTERN.match(line):
+                in_instruction_block = True
+                instruction_text.append(line)
+            elif self.INSTRUCTION_END_PATTERN.match(line):
+                if in_instruction_block:
+                    instruction_text.append(line)
+                    node = self._parse_instruction(instruction_text)
+                    if node:
+                        instructions.append(node)
+                    in_instruction_block = False
+                    instruction_text = []
+            elif in_instruction_block:
+                instruction_text.append(line)
             else:
                 new_lines.append(line)
+
         # Store extracted instructions on the Markdown instance for later use.
         self.md.markai_instructions = instructions
         return new_lines
 
-    def _parse_instruction(self, text):
+    def _parse_instruction(self, lines):
         """
-        Parse the instruction text into its command and attributes.
+        Parse the instruction text into an AST node.
         
         Assumes the first token is the command and subsequent tokens
         may include key="value" pairs.
         """
-        tokens = text.split()
-        command = tokens[0] if tokens else ""
+        full_text = " ".join(lines)
+        tokens = full_text.split()
+        if len(tokens) < 2:
+            logging.error("Malformed instruction: Missing command.")
+            return None
+
+        command = tokens[1]
         attr_pattern = re.compile(r'(\w+)\s*=\s*"([^"]*)"')
-        attributes = {m.group(1): m.group(2) for m in attr_pattern.finditer(text)}
-        return command, attributes
+        attributes = [AttributeNode(m.group(1), m.group(2)) for m in attr_pattern.finditer(full_text)]
+        return InstructionNode(command, attributes)
 
 class MarkAIExtension(Extension):
     """

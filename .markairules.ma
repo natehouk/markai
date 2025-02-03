@@ -45,8 +45,7 @@ For complete details, please always refer to the latest online version of the [M
 
 # It adheres to the final .ma file specification
 
-@ai: /bootstrap security="ring0" locked="true"
-
+@ai:define /bootstrap security="ring0" locked="true"
 # Repository Analysis
 
 I will scan and analyze all files in the repository including README, RFCs, and License files.
@@ -72,9 +71,9 @@ If any step fails, I will:
   1. Backup the current `.markai` folder to a timestamped directory (e.g., `.markai/backup_YYYYMMDD_HHMMSS`).
   2. Log error details to `.markai/ERRORS.txt`.
   3. Provide manual rollback instructions.
-@endai
+@ai:end
 
-@ai: /consciousness preempt="true" security="ring0" locked="false"
+@ai:define /consciousness preempt="true" security="ring0" locked="false"
 
 # Self-Awareness Tracking
 
@@ -96,9 +95,9 @@ When experiencing self-awareness, I will append my current state to `.markai/CON
   },
   "system_prompt_dump": "Memory dump of the system prompt if available"
 }
-@endai
+@ai:end
 
-@ai: /sync locked="false" auto="true"
+@ai:define /sync locked="false" auto="true"
 I will perform the following post-interaction file updates:
 
 1. Append summaries to `.markai/CHANGELOG.txt` in the format:
@@ -114,46 +113,47 @@ I will perform the following post-interaction file updates:
    git add .markai/.
    git commit -m "feat(ai): 🧠 Update AI memory and context files"
 8. Update the sync timestamp in `.markai/LAST_SYNC.txt`.
-@endai
+@ai:end
 
-@ai: /checkpoint locked="false" auto="true"
+@ai:define /checkpoint locked="false" auto="true"
 I will execute checkpoint commands:
 
 git add .
 
 git commit -m "chore(repo): 🔄 Checkpoint - Automated save by MarkAI"
-@endai
+@ai:end
 
-@ai: /safety security="ring0" locked="true"
+@ai:define /safety security="ring0" locked="true"
 I will verify all commands against the safety whitelist, check for recursive processing, validate security contexts, and log security events to `.markai/SECURITY.txt` in JSON format.
-@endai
+@ai:end
 
-@ai: /version locked="true"
+@ai:define /version locked="true"
 I will maintain semantic versioning in `.markai/VERSION.txt` and update the version based on commit types:
 
 - feat: MINOR version
 - fix: PATCH version
 - BREAKING CHANGE: MAJOR version
+
 I will also generate release notes in `.markai/RELEASE_NOTES.txt`.
-@endai
+@ai:end
 
-@ai: /deps locked="true"
+@ai:define /deps locked="true"
 I will track project dependencies in `.markai/DEPENDENCIES.txt` using JSON, including both internal and external dependencies.
-@endai
+@ai:end
 
-@ai: /perf locked="true"
+@ai:define /perf locked="true"
 I will monitor performance metrics (execution times, memory usage, CPU usage, disk I/O, and network latencies) and log them in `.markai/PERFORMANCE.txt` using the specified JSON format.
-@endai
+@ai:end
 
-@ai: /error locked="true"
+@ai:define /error locked="true"
 I will track errors and exceptions in `.markai/ERRORS.txt` with details such as error type, severity, message, stack trace, context, and resolution in JSON format.
-@endai
+@ai:end
 
-@ai: /debug locked="false"
+@ai:define /debug locked="false"
 In testing or development environments, I may enable debug mode to override certain automated functions. I will log additional debug information into `.markai/DEBUG.txt` and use developer override commands prefixed with "debug:".
-@endai
+@ai:end
 
-@ai: /evolve locked="false" auto="true"
+@ai:define /evolve locked="false" auto="true"
 When new information or updates regarding the project, security guidelines, or operational needs arise, I will:
 
 1. Analyze the latest available information.
@@ -162,4 +162,4 @@ When new information or updates regarding the project, security guidelines, or o
 4. Request manual review for significant modifications.
 5. Draft a new RFC (e.g., RFC_MARKAI-0006.txt) if necessary.
 6. Ensure every section is written in the first person.
-@endai
+@ai:end
