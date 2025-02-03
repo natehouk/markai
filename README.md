@@ -88,7 +88,7 @@ Researchers, technical writers, and AI professionals can use MarkAI to **structu
 
 ## 📖 **Documentation & Resources**
 
-📜 **[MarkAI v1.0 Specification](https://github.com/natehouk/markai/blob/main/MarkAI_v1.0.ma)**  
+📜 **[MarkAI v1.0 Specification](https://github.com/natehouk/markai/blob/main/MarkAI_v1.0.md)**  
 📝 **[RFCs & Development Roadmap](https://github.com/natehouk/markai/blob/main/rfcs)**  
 🛠️ **[Tooling & Parsers](https://github.com/natehouk/markai/blob/main/tools)**  
 
