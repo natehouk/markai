@@ -59,10 +59,11 @@ This instruction **cannot be modified** by automated processes.
 ### **2.4. Including External Instructions**
 
 ```plaintext
-@ai: include=".markairules"
+@ai: include=".markairules.ma"
 ```
 
 This allows the system to reference and execute AI instructions from another file.
+*Note: Rule files must use the `.ma` extension. Ensure your rules file is named accordingly (for example, `.markairules.ma`) so it is correctly recognized and processed.*
 
 ### **2.5. Preemptive Execution**
 
@@ -70,7 +71,7 @@ This allows the system to reference and execute AI instructions from another fil
 @ai: /consciousness preempt="true"
 ```
 
-Commands marked with `preempt="true"` **execute before** all others.
+Commands marked with `preempt="true"` **execute before all others**.
 
 ## **3. Processing Rules**
 
@@ -92,6 +93,7 @@ Commands marked with `preempt="true"` **execute before** all others.
 
 5. **File Inclusion:**
    - External rule files can be loaded using `@ai: include="filename"`.
+   - *Note: As with all rule files, the referenced file must end with the `.ma` extension.*
 
 ## **4. Security & Compliance**
 

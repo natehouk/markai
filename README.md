@@ -77,6 +77,8 @@ Researchers, technical writers, and AI professionals can use MarkAI to **structu
 - **`.ma`** → MarkAI-enhanced documents (recommended)
 - **`.md`** → Markdown-compatible fallback (AI-aware tools will process `@ai:` tags, others will ignore them)
 
+*Note: To ensure proper processing, any file containing MarkAI rules must use the `.ma` extension. For instance, a rules file should be named `.markairules.ma` instead of `.markairules`.*
+
 ### **🛠️ Processing Rules**
 
 ✅ **Standard Markdown renderers ignore `@ai:` tags.**  
@@ -95,7 +97,7 @@ Researchers, technical writers, and AI professionals can use MarkAI to **structu
 ## 🎉 **Join the Community!**
 
 📢 **Contribute:** We welcome contributions! Fork the repo and submit PRs.  
-💬 **Discuss:** Join the MarkAI community on Discord/GitHub Discussions.  
+💬 **Discuss:** Join the MarkAI community on GitHub Discussions.  
 🚀 **Stay Updated:** Follow [@natehouk](https://github.com/natehouk) for updates.  
 
 ---
