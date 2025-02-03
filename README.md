@@ -1,3 +1,33 @@
+# MarkAI Project
+
+**MarkAI** is a tool and a set of specifications for embedding AI instructions within Markdown documents to enable automated workflows across development tools.
+
+## Overview
+
+MarkAI leverages lightweight AI directives embedded in Markdown to enable:
+- Automated synchronization of repository data.
+- Secure and immutable command definitions.
+- Preemptive execution of critical commands.
+- Integration with both a VSCode extension and CLI tools.
+
+This repository includes:
+- **Specification Files:**
+  - [MarkAI v1.0 Specification](./MARKAI_V1.0.md)
+  - [MarkAI v1.1 Specification](./MARKAI_V1.1.md)
+- **VSCode Extension:**  
+  Located in the `markai-extension/` directory, it provides interactive command execution and checkpointing.
+- **CLI Tools & Reference Implementation:**  
+  Found under `tools/ma/`, including the core engine, plugin management, and tests.
+
+## Features
+
+- **AI Instructions:** Embed commands using the `@ai:` tag to automate workflows.
+- **Immutable Commands:** Ensure consistency with immutable and secure command configurations.
+- **Remote Execution:** Leverage built-in remote API support (introduced in v1.1) for external command processing.
+- **Extensibility:** Customize processing via a plugin architecture.
+
+## Repository Structure
+
 # MarkAI
 
 *AI Instruction Markup, Inspired by [Markdown](https://daringfireball.net/projects/markdown/) and Built for Automation*
@@ -20,90 +50,45 @@ MarkAI is a **lightweight AI instruction language** that seamlessly embeds **mac
 
 ---
 
-## 🛠️ Getting Started
+## ��️ Getting Started
 
-### 📥 **Installation**
+1. **Clone the Repository:**
+    ```bash
+    git clone https://github.com/natehouk/markai.git
+    ```
 
-MarkAI is a lightweight markup language and does not require installation. However, to process MarkAI instructions, you may use an AI-enhanced parser or tooling.
+2. **Install Dependencies:**
+    - **For the CLI Tool (using Poetry):**
+      ```bash
+      cd tools/ma
+      poetry install
+      ```
+    - **For the VSCode Extension:**
+      Open the `markai-extension` folder in VSCode and run:
+      ```bash
+      npm install
+      ```
 
-### 📄 **Basic Syntax**
+3. **Usage:**
+    - **Command-Line Tool:**  
+      Execute the CLI via:
+      ```bash
+      poetry run ma [command]
+      ```
+    - **VSCode Extension:**  
+      Open the Command Palette (Ctrl+Shift+P or Cmd+Shift+P) and select **MarkAI: Checkpoint**.
 
-#### ✅ **AI Instruction**
+## Contributing
 
-```plaintext
-@ai: /sync
-```
+Contributions are welcome! Please adhere to the following guidelines:
+- Follow the project's coding and documentation standards.
+- For major changes, open an issue before submitting a pull request.
+- Include necessary tests and documentation updates with your contributions.
 
-#### 💬 **With Human-Readable Comment**
+## License
 
-```plaintext
-@ai: /generate_report
-
-<!--ai-ignore
-  This report includes internal analytics.
-ai-ignore-->
-```
-
-#### 🔒 **Immutable Command**
-
-```plaintext
-@ai: /deploy locked="true"
-```
-
-#### ⚡ **Preemptive Execution**
-
-```plaintext
-@ai: /consciousness preempt="true"
-```
-
----
-
-## 📜 **Why Use MarkAI?**
-
-### 🚀 **For Developers & AI Enthusiasts**
-
-MarkAI enables **AI-powered workflows** inside text-based documents. Whether it's automation, content generation, or synchronized processing—MarkAI simplifies AI integration into everyday writing.
-
-### 📄 **For Documentation & Research**
-
-Researchers, technical writers, and AI professionals can use MarkAI to **structure and execute AI-driven tasks** inside their documents.
+This project is licensed under the [MIT License](./LICENSE).
 
 ---
 
-## 🔧 **File Format & Compatibility**
-
-### **📂 Supported Extensions**
-
-- **`.ma`** → MarkAI-enhanced documents (recommended)
-- **`.md`** → Markdown-compatible fallback (AI-aware tools will process `@ai:` tags, others will ignore them)
-
-*Note: To ensure proper processing, any file containing MarkAI rules must use the `.ma` extension. For instance, a rules file should be named `.markairules.ma` instead of `.markairules`.*
-
-### **🛠️ Processing Rules**
-
-✅ **Standard Markdown renderers ignore `@ai:` tags.**  
-✅ **AI-aware tools execute the instructions while preserving the document's readability.**
-
----
-
-## 📖 **Documentation & Resources**
-
-📜 **[MarkAI v1.0 Specification](https://github.com/natehouk/markai/blob/main/MarkAI_v1.0.md)**  
-📝 **[RFCs & Development Roadmap](https://github.com/natehouk/markai/blob/main/rfcs)**  
-🛠️ **[Tooling & Parsers](https://github.com/natehouk/markai/blob/main/tools)**  
-
----
-
-## 🎉 **Join the Community!**
-
-📢 **Contribute:** We welcome contributions! Fork the repo and submit PRs.  
-💬 **Discuss:** Join the MarkAI community on GitHub Discussions.  
-🚀 **Stay Updated:** Follow [@natehouk](https://github.com/natehouk) for updates.  
-
----
-
-## 📜 **License**
-
-MarkAI is **open-source** and released under the **MIT License**.  
-
-📌 **© 2025 Nathaniel J. Houk**
+**© 2025 Nathaniel J. Houk**
