@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "markai"
-version = "1.0.0"
-description = "MarkAI Reference Implementation"
+version = "1.0.0-alpha.1"
+description = "A modular implementation demonstrating best practices for building CLI tools with MarkAI."
 authors = ["Nathaniel Houk <nate@audiokit.ai>"]
 readme = "README.md"
 license = "MIT"

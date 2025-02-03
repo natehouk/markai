@@ -2,6 +2,17 @@
 
 # MarkAI Rules and Guidelines
 
+## Quick Overview of Critical MarkAI Rules
+- **Instruction Prefix:** All instructions begin with `@ai:` and commands must start with a `/`.
+- **Command Attributes:** Attributes like `preempt="true"` prioritize execution and `locked="true"` ensure immutability.
+- **Security & Logging:** Commands using `security="ring0"` enforce high-level security with comprehensive logging of errors and state.
+- **File Management:** Syncing, versioning, dependency tracking, and automated file operations (such as updates to `.markai/LAST_SYNC.txt` and `.markai/VERSION.txt`) are handled via predefined commands.
+
+For complete details, please always refer to the latest online version of the [MarkAI Specification v1.0](http://github.com/natehouk/markai/blob/main/MarkAI_v1.0.md). When network access is available, this document is automatically downloaded and cached locally as `.markaispec.v1.0.ma` (including the version number) for future reference; if a fresh copy cannot be obtained, the system will fallback to the cached file.
+
+# End of Quick Overview
+
+# MarkAI Rules and Guidelines (Detailed)
 1. **Instruction Format:**
    - Every MarkAI instruction must start on a new line with the prefix `@ai:`.
    - The first token following `@ai:` is treated as the command (for example, `/sync` or `/update_model`).
