@@ -2,6 +2,9 @@ import re
 import logging
 from pathlib import Path
 from datetime import datetime
+from plugins import PluginManager
+
+plugin_manager = PluginManager()  # Global instance for plugin management
 
 def parse_instruction_line(line: str):
     """
@@ -76,20 +79,30 @@ def execute_instruction(instr: dict):
 
 def process_instructions(instructions: list):
     """
-    Process a list of instructions, ensuring that preemptive commands execute first.
+    Process a list of instructions, ensuring that preemptive commands execute first,
+    and allowing plugin hooks to run before, during, and after instruction processing.
     """
-    # Commands with preempt="true" are executed before others.
+    # Execute pre-processing hooks to allow plugins to modify the instructions.
+    instructions = plugin_manager.execute_pre_process(instructions)
+
+    # Separate preempt and normal instructions.
     preempt_instructions = [instr for instr in instructions if instr.get("attributes", {}).get("preempt") == "true"]
     normal_instructions = [instr for instr in instructions if instr.get("attributes", {}).get("preempt") != "true"]
 
     for instr in preempt_instructions:
+        # Allow plugins to hook into each instruction.
+        plugin_manager.execute_on_instruction(instr)
         try:
             execute_instruction(instr)
         except Exception as e:
             logging.error(f"Error executing preempt command {instr.get('command')}: {e}")
 
     for instr in normal_instructions:
+        plugin_manager.execute_on_instruction(instr)
         try:
             execute_instruction(instr)
         except Exception as e:
-            logging.error(f"Error executing command {instr.get('command')}: {e}") 
+            logging.error(f"Error executing command {instr.get('command')}: {e}")
+
+    # Execute post-processing hooks after instructions are processed.
+    plugin_manager.execute_post_process(instructions) 
