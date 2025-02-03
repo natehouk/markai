@@ -2,13 +2,13 @@ RFC: MARKAI-0003
 Title: Enhancements to Attribute Handling in AI Instructions
 
 Abstract:
-This RFC defines the usage and implementation details for the "include," "security," and "locked" attributes in AI instruction files. These directives support modular instruction management, secure processing, and controlled immutability.
+This document outlines the protocols and implementation details for handling the "include," "security," and "locked" attributes in AI instruction files. These enhancements ensure modular instruction management, secure processing, and strict immutability protocols, thereby reinforcing system integrity.
 
 1. Include Attribute
 ------------------------
 Definition:
-- The "include" attribute allows an AI instruction file to reference external files that contain additional AI instructions.
-- It provides a mechanism for centralizing and reusing instruction definitions across multiple files.
+- The "include" attribute permits an AI instruction file to reference and incorporate external files containing supplementary instructions.
+- This mechanism enables centralized management and reuse of instruction definitions across multiple files.
 - Example usage:
   <ai_instruction include=".markairules" />
   
@@ -17,15 +17,15 @@ The system must load and process the contents from the file specified in the inc
 2. Security Attribute
 -------------------------
 Definition:
-- The "security" attribute establishes the required security context for an AI instruction.
-- Available security levels can include designations such as ring0, ring1, etc.
-- Instructions marked with security="ring0" denote the highest level of security, requiring extra precautions and protection against modification.
+- The "security" attribute specifies the requisite security context for an AI instruction.
+- Security levels (e.g., ring0) indicate the sensitivity of an instruction, with high-security instructions subject to enhanced protective measures.
 
-3. Locked Attribute (Refer to RFC_MARKAI-0001)
+3. Locked Attribute
 ------------------------
 Definition:
-- The "locked" attribute indicates whether an AI instruction is immutable.
-- As specified in RFC_MARKAI-0001 (The Law of Immutability), once an instruction is marked with locked="true", it is considered permanently immutable under normal circumstances.
+- The "locked" attribute designates an AI instruction as immutable.
+- In accordance with RFC 0001, any instruction marked with `locked="true"` is permanently immutable.
+- Attempts to modify or unlock such instructions must be rejected except under conditions explicitly defined in this standard.
 
 Additional Unlocking Rule:
 - If an unlock command is issued (i.e., a request to update an instruction from locked="true" to locked="false"), the system shall proceed with the change only if the instruction does NOT have security="ring0".
@@ -43,7 +43,7 @@ Additional Unlocking Rule:
 These measures ensure that while AI instructions can be modular and adaptive in many contexts, those requiring the highest security remain rigorously protected against unauthorized modification.
 
 Conclusion:
-This RFC clarifies how the include, security, and locked attributes function together and explicitly defines the non-unlockability of instructions with security="ring0". This ensures both modularity in instruction management and strict adherence to security protocols.
+This RFC formalizes the integrated approach to managing the "include," "security," and "locked" attributes in AI instructions, thereby ensuring secure, modular, and immutable processing. Strict adherence to these guidelines is essential for preserving system integrity.
 
 Approval:
 [Approver Signature]

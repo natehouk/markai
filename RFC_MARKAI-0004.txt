@@ -2,44 +2,31 @@ RFC: MARKAI-0004
 Title: Unified Enhancements to the AI Instruction Processing System
 
 Abstract:
-This RFC consolidates and extends previous specifications (RFC 0001, RFC 0002, and RFC 0003) regarding AI instruction processing. It removes reliance on any external configuration file in favor of per‑instruction attributes, introduces automatic timestamp updates for synchronization via `.markai/LAST_SYNC.txt`, and reaffirms attribute handling for inclusion, security, and immutability. These changes simplify configuration, ensure proper timing for sync operations, and improve the overall robustness and security of the system.
+This RFC consolidates and extends previous specifications (RFC 0001, RFC 0002, and RFC 0003) regarding AI instruction processing. The enhancements eliminate reliance on external configuration files by leveraging per-instruction attributes, introduce automatic timestamp updates for synchronization via the `.markai/LAST_SYNC.txt` file, and reaffirm protocols for attribute handling related to inclusion, security, and immutability. These modifications streamline configuration management, ensure proper synchronization intervals, and enhance overall system robustness and security.
 
 1. Introduction
-   The AI instruction processing system was initially defined in RFC 0001, which established core processing rules, immutability, and the basic instruction tag format. RFC 0002 introduced auto synchronization for the "sync" command—but has now been revised to remove any external configuration mechanisms. RFC 0003 clarified attribute handling for inclusion, security, and locked content. In this revision, I remove the external configuration file completely. Instead, I activate auto synchronization directly via the auto="true" attribute on the sync instruction and track the operation's timing by logging timestamps in `.markai/LAST_SYNC.txt`.
+The foundational AI instruction processing system was originally defined in RFC 0001, which established core processing rules, immutability constraints, and the basic instruction tag format. Subsequent updates in RFC 0002 introduced automatic synchronization for the "sync" command, and RFC 0003 clarified attribute handling for inclusion, security, and locked content. In this revision, the external configuration file is eliminated. Instead, auto-synchronization is activated via the `auto="true"` attribute within the sync instruction, with corresponding timing logged in the `.markai/LAST_SYNC.txt` file.
 
 2. Enhancements Overview
+2.1. Auto Synchronization Enhancements:
+   - Removal of External Configuration: The external configuration file (e.g., `.markai/config.json`) is deprecated.
+   - Per-Instruction Control: The synchronization process is now governed by the `auto="true"` attribute on the `<ai_instruction cmd="sync">` tag.
+   - Timestamp Logging: Upon successful synchronization, the current timestamp is recorded in `.markai/LAST_SYNC.txt` to ensure a minimum interval of five minutes between sync events.
+   - Streamlined Workflow: This approach obviates the need for separate configuration settings, making auto-synchronization explicit for each instruction.
 
-2.1. Auto Synchronization Enhancements
-   - **Removal of External Config File:** All external configuration (formerly in `.markai/config.json`) has been removed.
-   - **Per-Instruction Control:** Auto synchronization is now activated by including auto="true" on the `<ai_instruction cmd="sync">` tag.
-   - **Timestamp Logging:** Upon successful sync, I update `.markai/LAST_SYNC.txt` with the current timestamp. This file is used to enforce a minimum interval of 5 minutes between successive automatic syncs.
-   - **Simplified Workflow:** These changes eliminate the need for a separate configuration file, making the auto synchronization behavior explicit for every instruction.
-
-2.2. Attribute Handling and Immutability
-   - **Include Attribute:** As defined in RFC 0003, the include attribute allows the seamless integration of external rule files.
-   - **Security and Locked Attributes:** I enforce the rules established in RFC 0001 and RFC 0003:
-       • Instructions marked with locked="true" (or implicitly locked when not otherwise specified) cannot be modified.
-       • Instructions with security attributes (e.g., security="ring0") maintain strict immutability, and any unlock attempts are disallowed.
-   - This ensures that all AI instructions are processed securely and that immutability constraints remain uncompromised.
+2.2. Attribute Handling and Immutability:
+   - Inclusion Attribute: Consistent with earlier RFCs, the inclusion attribute allows for the integration of external rule files.
+   - Security and Locked Attributes: In alignment with RFCs 0001 and 0003, instructions marked as locked (`locked="true"`) or with stringent security attributes must remain immutable.
 
 3. Implementation Requirements
-   - **Processing Rules:**
-     • I process each `<ai_instruction>` tag exactly once.
-     • Nested instruction tags are not processed.
-     • I skip any content within `<!--ai-ignore ... ai-ignore-->` comments.
-   - **Sync Command Workflow:**
-     a) I stage and commit the designated files (for example, `.markai/CHANGELOG.txt`, `.markai/TODO.txt`, `.markai/MEMORY.txt`, `.markai/CONTEXT.txt`, `.markai/ROADMAP.txt`, and `.markai/TMP.txt`).
-     b) I append or update file entries following the prescribed formats.
-     c) I write the current timestamp to `.markai/LAST_SYNC.txt` after a successful sync.
-     d) I check that at least 5 minutes have elapsed since the previous sync (as determined from `.markai/LAST_SYNC.txt`) before triggering another automatic sync.
-   - **Error Handling:**
-     • I skip malformed tags.
-     • I log any errors—including attempts to modify locked content—to `.markai/ERRORS.txt`.
+   - Processing Rules: Each `<ai_instruction>` tag is processed exactly once without support for nested instruction tags.
+   - Sync Command Workflow: The system stages and commits designated files, updates file records as specified, and logs the synchronization timestamp.
+   - Error Handling: Malformed tags are bypassed, and any improper attempts to modify locked content are recorded in `.markai/ERRORS.txt`.
 
 4. Security Considerations
-   - **Immutability Enforcement:** Any attempt to modify locked instructions results in an ImmutableModificationError.
-   - **Security Attributes:** Instructions with sensitive security attributes (e.g., security="ring0") are processed with additional safeguards to prevent unauthorized modifications.
-   - **Audit Logging:** All automated operations—including sync events and error occurrences—are logged to facilitate an audit trail and allow for manual rollback if necessary.
+   - Immutability Enforcement: Any modifications to content marked as immutable trigger an error condition.
+   - Security Attributes: High-security instructions (e.g., those with `security="ring0"`) are subject to enhanced protection protocols.
+   - Audit Logging: All automated operations, including sync events and error occurrences, are logged to support auditing and facilitate rollbacks if necessary.
 
 5. Conclusion
-   This RFC (MARKAI-0004) consolidates the evolution of the AI instruction processing system. By removing external configuration and implementing per‑instruction control for synchronization—while automatically documenting sync events in `.markai/LAST_SYNC.txt`—I have simplified and clarified the system's behavior. RFC 0004 builds upon the conventions established in RFCs 0001, 0002, and 0003, ensuring a robust and cohesive framework for all AI-enabled operations. 
+This RFC (MARKAI-0004) formalizes the enhancements made in AI instruction processing by eliminating external configuration, enforcing per-instruction synchronization, and maintaining robust security and immutability. These improvements collectively contribute to a simplified, secure, and efficient operational framework. 

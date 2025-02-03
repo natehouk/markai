@@ -2,22 +2,44 @@ Request for Comments: MARKAI-0002
 Category: Standards Track
 Published: February 2025
 
-         Improvements to AI Instruction Processing
-          (Auto Sync and Prompt Control Enhancements)
+           Enhancements to AI Instruction Processing: Auto-Synchronization and Prompt Controls
 
-Status of this Memo
+Status of this Memo:
+This memorandum outlines enhancements to the AI instruction processing system. Distribution of this memo is unrestricted.
 
-   This memo specifies enhancements to the AI instruction processing
-   system. Its purpose is to document the newly added features for 
-   automatic synchronization and user prompt controls. Distribution
-   of this memo is unlimited.
+Abstract:
+This document details the enhancements to the AI instruction processing system, including the integration of an automatic synchronization feature and the refinement of user prompt controls. Specifically, the auto-synchronization capability is engaged via the `auto="true"` attribute on the `<ai_instruction cmd="sync">` tag. Additionally, a prompt override mechanism is available to require user confirmation when appropriate.
+
+1. Introduction
+The initial framework for AI instruction processing has been updated to incorporate improved synchronization and prompt control features. These enhancements streamline operations and ensure that critical updates undergo deliberate user verification when required.
+
+2. Enhancements Overview
+2.1. Sync Command (cmd=sync):
+   - The synchronization process now automatically stages and commits designated files (e.g., `.markai/CHANGELOG.txt`, `.markai/TODO.txt`, `.markai/MEMORY.txt`, and `.markai/CONTEXT.txt`).
+   - Auto-synchronization is activated by including the `auto="true"` attribute on the `<ai_instruction cmd="sync">` tag.
+   - Following synchronization, the current timestamp is recorded in `.markai/LAST_SYNC.txt` to enforce a minimum interval of five minutes between successive syncs.
+
+2.2. Auto-Synchronization Configuration:
+   - Global configuration parameters have been deprecated in favor of explicit per-instruction controls.
+   - An optional prompt override is available; specifying prompt="true" forces a user confirmation prior to execution even when auto-synchronization is enabled.
+
+3. Implementation Requirements
+   - The auto-synchronization process includes staging, committing, and timestamp logging to maintain system consistency.
+   - Per-instruction overrides take precedence over any prior global settings, ensuring that critical operations receive explicit user consent when necessary.
+
+4. Security Considerations
+   - The system incorporates audit logging and robust error handling to ensure that any inadvertent or unauthorized operations are promptly identified and addressed.
+   - User prompts serve as an additional layer of protection against accidental automated modifications.
+
+5. Conclusion
+The enhancements detailed herein represent a substantial improvement to the AI instruction processing system through the introduction of robust auto-synchronization and user prompt controls. These changes ensure both operational efficiency and strict oversight for sensitive actions.
 
 Copyright Notice
 
    Copyright (C) 2025 Nathaniel J. Houk. All rights reserved.
    Licensed under the MIT License.
 
-Abstract:
+Description:
 Auto synchronization for the "sync" command is now controlled solely via per-instruction attributes and internal state tracking. When a sync instruction includes auto="true", I automatically stage and commit the designated files and record the timestamp in `.markai/LAST_SYNC.txt` to enforce a 5-minute interval between sync operations.
 
 Details:
@@ -28,7 +50,6 @@ Details:
    • I update `.markai/LAST_SYNC.txt` with the current timestamp after the sync completes.
    • I ensure that at least 5 minutes have elapsed since the previous sync by comparing the current time with the timestamp in `.markai/LAST_SYNC.txt`.
 
-Description:
 This change streamlines auto synchronization by eliminating any external configuration, making the behavior explicit in each instruction and managing timing solely via internal state.
 
 1. Introduction

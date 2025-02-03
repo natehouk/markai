@@ -2,157 +2,68 @@ Request for Comments: MARKAI-0001
 Category: Standards Track
 Published: February 2025
 
-                    AI Instruction Tag Format Specification
+                AI Instruction Tag Format Specification
 
-Status of this Memo
+Status of this Memo:
+This memorandum formally documents a standard for embedding machine-readable AI processing instructions within text files. Distribution of this memo is unrestricted.
 
-   This memo documents an AI processing standard. Distribution of this memo
-   is unlimited.
-
-Copyright Notice
-
-   Copyright (C) 2025 Nathaniel J. Houk. All rights reserved.
-   Licensed under MIT License.
-
-Abstract
-
-   This document specifies a standardized format for embedding machine-
-   readable AI processing instructions within text files. The format
-   uses XML-style tags for instructions and HTML-style comments for human
-   annotations, providing both machine processability and human
-   readability while preventing recursive processing issues.
+Abstract:
+This document specifies a standardized format for embedding AI processing instructions within text files. It employs XML-style tags for machine-readability, complemented by HTML-style comments for human-readable annotations. This dual-format methodology ensures that instructions are processed automatically while explanatory notes remain accessible for human review, thereby preventing recursive processing issues.
 
 1. Introduction
+The increasing reliance on AI systems necessitates a standardized methodology for incorporating machine-processable instructions into text files. This document introduces such a format, ensuring clarity, consistency, and the avoidance of processing ambiguities.
 
-   The increasing use of AI systems in text processing has created a need
-   for a standardized way to embed processing instructions within text
-   files. This document specifies such a format.
+2. Instruction Format
+2.1. AI Instruction Tag:
+   - Standard Format:
+     <ai_instruction>
+       [Instruction content]
+     </ai_instruction>
+   - Protected Content:
+     Instructions enclosed within `<ai_instruction locked="true">` are immutable and cannot be altered by automated processes.
 
-1.1. The Halting Problem and AI Processing
-
-   A fundamental challenge in AI instruction processing is the potential
-   for recursive interpretation - where an AI system processes instructions
-   about processing instructions, potentially leading to an infinite loop.
-   This is a practical manifestation of the halting problem in computer
-   science.
-
-   The format addresses this challenge through the ai-ignore comment
-   syntax, which creates explicit boundaries between processable
-   instructions and human meta-commentary. This prevents AI systems from
-   recursively processing comments about processing, while maintaining
-   the ability for humans to document and explain the instructions.
-
-1.2. The Law of Immutability
-
-   The Law of Immutability is a fundamental, inviolable principle of the
-   MarkAI system. It states that any instruction marked with locked="true"
-   becomes permanently immutable and cannot be modified by any means.
-   This law supersedes all other processing rules and cannot be
-   overridden.
-
-   Implementation Requirements:
-   - MUST throw ImmutableModificationError for any attempt to modify
-     locked content
-   - MUST treat missing locked attribute as locked="false"
-   - MUST validate locked attribute before any other processing
-   - MUST NOT provide any mechanism to unlock a locked instruction
-   - MUST maintain immutability across all processing contexts
-
-   Example Error:
-   ```
-   ImmutableModificationError: Cannot modify instruction at line 42
-   Reason: Instruction is marked as locked="true"
-   Action: Create new instruction instead of modifying locked content
-   ```
-
-2. Core Format
-
-2.1. AI Instruction Tag
-    <ai_instruction>
-    [instruction content]
-    </ai_instruction>
-
-    Optional: Prevent modification
-    <ai_instruction locked="true">
-    [protected content]
-    </ai_instruction>
-
-2.2. Human Comments
-    <!--ai-ignore
-    [human comment content]
-    ai-ignore-->
+2.2. Human-Readable Comments:
+   - Annotations not intended for processing shall be enclosed using the "ai-ignore" syntax:
+     <!--ai-ignore
+         [Human-readable comment content]
+     ai-ignore-->
 
 3. Processing Rules
-
-3.1. Basic Requirements
-- Process each instruction tag exactly once
-- Never process nested instruction tags
-- Skip all content within ai-ignore comments
-- Honor locked="true" directives
-- Stop if processing depth exceeds 5 levels
-
-3.2. Error Handling
-- Skip malformed tags
-- Only process outermost tag when nested
-- Treat invalid attributes as locked="true"
+   - Each instruction tag is to be processed exactly once.
+   - Nested instruction tags are not processed.
+   - Content within ai-ignore annotations is ignored during processing.
+   - Instructions marked with `locked="true"` are strictly immutable.
+   - Malformed or recursive tags trigger error handling protocols.
 
 4. Usage Guidelines
-
-4.1. Writing Instructions
-- Use clear, unambiguous language
-- One instruction per tag
-- Add human comments for context
-- Avoid nesting instructions
-
-4.2. Writing Comments
-- Use comments to explain "why"
-- Keep comments current
-- Document dependencies
-- Explain complex requirements
+   - Each instruction should be accompanied by appropriate human-readable annotations.
+   - The standard ensures clarity and maintainability, facilitating both machine processing and human verification.
+   - All instructions must adhere strictly to this standardized format.
 
 5. Examples
+   Basic Instruction:
+   <ai_instruction>
+     Format this text as JSON.
+   </ai_instruction>
 
-Basic Instruction:
-<ai_instruction>
-Format this text as JSON
-</ai_instruction>
+   Instruction with Human-Readable Comment:
+   <ai_instruction>
+     Process the content.
+     <!--ai-ignore
+         This annotation is for human reference only.
+     ai-ignore-->
+     Format as JSON.
+   </ai_instruction>
 
-With Human Comment:
-<ai_instruction>
-Format this text
-<!--ai-ignore
-This needs special formatting for legacy systems
-ai-ignore-->
-as JSON
-</ai_instruction>
+   Protected Content:
+   <ai_instruction locked="true">
+     This content is immutable.
+   </ai_instruction>
 
-Protected Content:
-<ai_instruction locked="true">
-Do not modify this instruction
-</ai_instruction>
+6. Test Cases
+6.1. Immutability Tests:
+   - Any attempt to alter locked content must result in an ImmutableModificationError.
+   - Partial modifications of locked content are strictly prohibited.
 
-2. Test Cases
-
-2.1. Immutability Tests
-    
-    Test Case 1: Modification Rejection
-    <ai_instruction locked="true">
-    Original content
-    </ai_instruction>
-    
-    Attempted modification MUST fail:
-    <ai_instruction locked="true">
-    Modified content  /* MUST THROW ERROR */
-    </ai_instruction>
-
-    Test Case 2: Partial Modification Rejection
-    <ai_instruction locked="true">
-    Content A
-    Content B
-    </ai_instruction>
-    
-    Even partial modifications MUST fail:
-    <ai_instruction locked="true">
-    Content A
-    Modified B     /* MUST THROW ERROR */
-    </ai_instruction>
+Conclusion:
+This RFC establishes a rigorous standard for embedding AI processing instructions within text files, ensuring that the system maintains both machine precision and human clarity.
