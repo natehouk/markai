@@ -3,7 +3,7 @@
 *AI Instruction Markup, Inspired by Markdown and Built for Automation*
 
 **Version:** 1.0\
-**Date:** March 2025\
+**Date:** January 2025\
 **License:** MIT
 
 ---
