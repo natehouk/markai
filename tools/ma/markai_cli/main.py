@@ -8,7 +8,7 @@ from markdown import Extension
 from markdown.preprocessors import Preprocessor
 
 # New import for core engine functions.
-from core import parse_markai_file, process_instructions
+from ma.core import parse_markai_file, process_instructions
 
 app = typer.Typer()
 
