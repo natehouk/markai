@@ -1,12 +1,12 @@
 # MarkAI
 
-*AI Instruction Markup, Inspired by Markdown and Built for Automation*
+*AI Instruction Markup, Inspired by [Markdown](https://daringfireball.net/projects/markdown/) and Built for Automation*
 
 ![License](https://img.shields.io/badge/license-MIT-green.svg) ![Version](https://img.shields.io/badge/version-1.0-blue.svg)
 
 ## 🚀 What is MarkAI?
 
-MarkAI is a **lightweight AI instruction language** that seamlessly embeds **machine-executable commands** inside Markdown-like documents. Inspired by Markdown, it allows AI-powered automation while preserving human readability.
+MarkAI is a **lightweight AI instruction language** that seamlessly embeds **machine-executable commands** inside Markdown-like documents. Inspired by [Markdown](https://daringfireball.net/projects/markdown/), it allows AI-powered automation while preserving human readability.
 
 > **"Think of it as Markdown for AI, where your documents become actionable."**
 
