@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "markai"
+version = "1.0.0"
+description = "MarkAI Reference Implementation CLI tool"
+authors = ["Your Name <your_email@example.com>"]
+readme = "tools/README.md"
+license = "MIT"
+
+# Define the package: the "ma" package is found under tools/ma.
+packages = [
+    { include = "ma", from = "tools" }
+]
+
+[tool.poetry.scripts]
+ma = "ma.main:app"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+typer = "^0.9.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api" 

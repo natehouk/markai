@@ -1,3 +1,31 @@
+# .markairules
+
+# MarkAI Rules and Guidelines
+
+1. **Instruction Format:**
+   - Every MarkAI instruction must start on a new line with the prefix `@ai:`.
+   - The first token following `@ai:` is treated as the command (for example, `/sync` or `/update_model`).
+   - Additional tokens can define attributes in the form `key="value"`.
+
+2. **Command Execution:**
+   - Recognized commands (e.g., `/sync`, `/update_model`, `/format_json`, `/consciousness`, `include`) have predefined behaviors.
+   - Commands with the attribute `preempt="true"` are executed before all other instructions.
+
+3. **Plugin and Extension Guidelines:**
+   - Third-party plugins can register new commands or override existing ones by implementing the appropriate interface.
+   - Plugins should not directly alter the core engine; instead, they must use the provided hooks for preprocessing, postprocessing, or command interception.
+   - Always maintain backward compatibility when new commands are added.
+
+4. **Error Handling and Logging:**
+   - Unrecognized commands should be logged and safely ignored without interrupting processing.
+   - All I/O operations must include appropriate error handling to ensure system stability.
+
+5. **Configuration:**
+   - Users can enable or disable specific instruction types via configuration settings.
+   - Any changes or extensions to the instruction processing must be documented within the plugin or the configuration guide.
+
+# End of Rules
+
 # MarkAI Rules File
 
 # Version: 1.0.0
