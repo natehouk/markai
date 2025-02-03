@@ -1,6 +1,7 @@
 import typer
 import re
 import logging
+import sys  # <-- Added for detecting command-line arguments.
 from pathlib import Path
 from datetime import datetime
 from markdown import Extension
@@ -90,5 +91,40 @@ def version():
     """
     typer.echo("MarkAI Reference Implementation v1.0")
 
+# -------------------------------------------------------------------
+# New: Interactive Prompt Mode Implementation
+# -------------------------------------------------------------------
+def interactive_prompt():
+    """
+    Interactive prompt mode for MarkAI.
+    Type 'help' for available commands or 'exit' to quit.
+    """
+    print("Entering MarkAI prompt mode. Type 'help' for commands, or 'exit' to quit.")
+    while True:
+        try:
+            command_input = input("ma> ").strip()
+            if command_input.lower() in ("exit", "quit"):
+                print("Exiting prompt mode.")
+                break
+            elif command_input.lower() == "help":
+                print("Available commands: /sync, /update_model, /format_json, /consciousness, help, exit")
+                continue
+            elif command_input == "":
+                continue
+            else:
+                # Construct a simple instruction dictionary from the input.
+                instruction = {"command": command_input, "attributes": {}}
+                # Execute the instruction via the core processing engine.
+                process_instructions([instruction])
+        except (KeyboardInterrupt, EOFError):
+            print("\nExiting prompt mode.")
+            break
+
+# -------------------------------------------------------------------
+# Modified main execution block: Enter interactive prompt mode if no arguments
+# -------------------------------------------------------------------
 if __name__ == "__main__":
-    app() 
+    if len(sys.argv) == 1:
+        interactive_prompt()
+    else:
+        app() 

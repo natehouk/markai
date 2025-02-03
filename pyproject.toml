@@ -1,18 +1,19 @@
 [tool.poetry]
 name = "markai"
 version = "1.0.0"
-description = "MarkAI Reference Implementation CLI tool"
-authors = ["Your Name <your_email@example.com>"]
-readme = "tools/README.md"
+description = "MarkAI Reference Implementation"
+authors = ["nate@audiokit.ai"]
+readme = "README.md"
 license = "MIT"
 
-# Define the package: the "ma" package is found under tools/ma.
+# Only include the 'ma' package from tools/ma.
 packages = [
     { include = "ma", from = "tools" }
 ]
 
 [tool.poetry.scripts]
-ma = "ma.main:app"
+# Single CLI entry point for the core tool.
+ma = "ma.markai_core.main:app"
 
 [tool.poetry.dependencies]
 python = "^3.11"

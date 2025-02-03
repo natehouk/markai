@@ -13,4 +13,19 @@ __pycache__/
 *.pyc
 
 # Logs
-*.log 
+*.log
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment files (optional)
+.env
+.venv
+venv/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/ 
