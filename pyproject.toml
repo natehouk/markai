@@ -2,7 +2,7 @@
 name = "markai"
 version = "1.0.0"
 description = "MarkAI Reference Implementation"
-authors = ["nate@audiokit.ai"]
+authors = ["Nathaniel Houk <nate@audiokit.ai>]
 readme = "README.md"
 license = "MIT"
 
